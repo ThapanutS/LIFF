@@ -25,15 +25,16 @@ const code = document.getElementById("code");
 const friendShip = document.getElementById("friendShip");
 
 async function main() {
-  await liff.init({ liffId: "1655763897-w2mPdR8K" });
+  await liff.init({ liffId: "1655776146-P0klaYBN" });
   switch (liff.getOS()) {
     case "android":
-      body.style.backgroundColor = "#d1f5d3";
+      body.style.backgroundColor = "#FFCC99";
       break;
     case "ios":
-      body.style.backgroundColor = "#eeeeee";
+      body.style.backgroundColor = "#FFCC99";
       break;
   }
+
   if (!liff.isInClient()) {
     if (liff.isLoggedIn()) {
       btnShare.style.display = "block";
@@ -45,7 +46,7 @@ async function main() {
       btnLogIn.style.display = "block";
       btnLogOut.style.display = "none";
     }
-  } else if (liff.getContext().type != "none") {
+  } else {
     btnShare.style.display = "block";
     btnSend.style.display = "block";
     getUserProfile();
@@ -55,8 +56,10 @@ async function main() {
   if (liff.isInClient() && liff.getOS() === "android") {
     btnScanCode.style.display = "block";
   }
+
   btnOpenWindow.style.display = "block";
 }
+main();
 
 async function getUserProfile() {
   const profile = await liff.getProfile();
@@ -67,7 +70,6 @@ async function getUserProfile() {
   email.innerHTML = "<b>email:</b> " + liff.getDecodedIDToken().email;
 }
 
-main();
 btnLogIn.onclick = () => {
   liff.login();
 };
@@ -78,27 +80,49 @@ btnLogOut.onclick = () => {
 };
 
 async function sendMsg() {
-  if (liff.getContext().type !== "none") {
+  if (
+    liff.getContext().type !== "none" &&
+    liff.getContext().type !== "external"
+  ) {
+    var message = prompt("กรอกข้อความที่ต้องการส่ง");
     await liff.sendMessages([
       {
         type: "text",
-        text: "Hello Photography"
+        text: message
       }
     ]);
-    liff.closeWindow();
+    alert("Message sent");
   }
 }
 btnSend.onclick = () => {
   sendMsg();
 };
 async function shareMsg() {
-  await liff.shareTargetPicker([
-    {
-      type: "image",
-      originalContentUrl: "https://d.line-scdn.net/stf/line-lp/2016_en_02.jpg",
-      previewImageUrl: "https://d.line-scdn.net/stf/line-lp/2016_en_02.jpg"
-    }
-  ]);
+  alert("Message sent");
+  var message = prompt("กรอกข้อความที่ต้องการส่ง");
+  if (message == "") {
+    await liff.shareTargetPicker([
+      {
+        type: "image",
+        originalContentUrl:
+          "https://sv1.picz.in.th/images/2021/03/19/DEkRkb.jpg",
+        previewImageUrl: "https://sv1.picz.in.th/images/2021/03/19/DEkRkb.jpg"
+      }
+    ]);
+  } else {
+    await liff.shareTargetPicker([
+      {
+        type: "image",
+        originalContentUrl:
+          "https://sv1.picz.in.th/images/2021/03/19/DEkRkb.jpg",
+        previewImageUrl: "https://sv1.picz.in.th/images/2021/03/19/DEkRkb.jpg"
+      },
+      {
+        type: "text",
+        text: message
+      }
+    ]);
+  }
 }
 btnShare.onclick = () => {
   shareMsg();
@@ -118,7 +142,7 @@ btnOpenWindow.onclick = () => {
 };
 
 async function getFriendship() {
-  let msg = "Hooray! You and our chatbot are friend.";
+  let msg = "Hello! You and our chatbot are friend.";
   const friend = await liff.getFriendship();
   if (!friend.friendFlag) {
     msg =

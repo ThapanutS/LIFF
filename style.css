@@ -1,5 +1,5 @@
 body {
-  margin: 20px
+  margin: 20px;
 }
 
 button {
@@ -10,11 +10,16 @@ button {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
+  
+  background-color: #ff6000ff;
+  border-color: #ffffff;
+  border-width: 2px;
+  color: #ffffff;
 }
 
-p {
-  border-bottom: 1px dashed #ddd
-}
+/*p {
+  border-bottom: 1px dashed #ddd;
+}*/
 
 #pictureUrl {
   margin: 0 auto;
@@ -33,7 +38,8 @@ p {
   border-radius: 256px;
 }
 
-#accessToken, #utouId {
+#accessToken,
+#utouId {
   display: block;
-  overflow: auto
+  overflow: auto;
 }
