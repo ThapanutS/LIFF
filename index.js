@@ -39,7 +39,9 @@ async function main() {
     if (liff.isLoggedIn()) {
       btnShare.style.display = "block";
       btnLogIn.style.display = "none";
+      btnSend.style.display = "block";
       btnLogOut.style.display = "block";
+      btnOpenWindow.style.display = "block";
       getUserProfile();
       getFriendship();
     } else {
@@ -56,8 +58,6 @@ async function main() {
   if (liff.isInClient() && liff.getOS() === "android") {
     btnScanCode.style.display = "block";
   }
-
-  btnOpenWindow.style.display = "block";
 }
 main();
 
@@ -98,7 +98,6 @@ btnSend.onclick = () => {
   sendMsg();
 };
 async function shareMsg() {
-  alert("Message sent");
   var message = prompt("กรอกข้อความที่ต้องการส่ง");
   if (message == "") {
     await liff.shareTargetPicker([
@@ -123,6 +122,7 @@ async function shareMsg() {
       }
     ]);
   }
+  alert("Message sent");
 }
 btnShare.onclick = () => {
   shareMsg();
