@@ -52,6 +52,7 @@ async function main() {
   } else {
     btnShare.style.display = "block";
     btnSend.style.display = "block";
+    btnOpenWindow.style.display = "block";
     getUserProfile();
     getFriendship();
   }
