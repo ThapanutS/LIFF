@@ -26,6 +26,7 @@ const friendShip = document.getElementById("friendShip");
 
 async function main() {
   await liff.init({ liffId: "1655776146-P0klaYBN" });
+  body.style.backgroundColor = "#FFCC99";
   switch (liff.getOS()) {
     case "android":
       body.style.backgroundColor = "#FFCC99";
